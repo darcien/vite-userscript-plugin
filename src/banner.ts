@@ -5,23 +5,8 @@ export class Banner {
   private maxKeyLength: number
 
   constructor(private readonly config: HeaderConfig) {
-    this.addHomepageMeta()
     this.maxKeyLength =
       Math.max(...Object.keys(this.config).map((key) => key.length)) + 1
-  }
-
-  private addHomepageMeta(): void {
-    const homePage = this.config.homepage ?? this.config.homepageURL
-    if (homePage) {
-      this.config.updateURL = new URL(
-        `${this.config.name}.meta.js`,
-        homePage
-      ).href
-      this.config.downloadURL = new URL(
-        `${this.config.name}.user.js`,
-        homePage
-      ).href
-    }
   }
 
   private addSpaces(str: string): string {
