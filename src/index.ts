@@ -47,6 +47,8 @@ export default function UserscriptPlugin(
       socketConnection = request.accept(null, request.origin)
     })
 
+    const fileName = config.fileName ?? config.header.name
+
     return {
       name: pluginName,
       apply: 'build',
@@ -56,9 +58,9 @@ export default function UserscriptPlugin(
             minify: false,
             lib: {
               entry: config.entry,
-              name: config.header.name,
+              name: fileName,
               formats: ['iife'],
-              fileName: () => `${config.header.name}.js`
+              fileName: () => `${fileName}.js`
             },
             rollupOptions: {
               output: {
@@ -125,7 +127,9 @@ export default function UserscriptPlugin(
       },
       async writeBundle(output, bundle) {
         const { open, port } = config.server!
-        const sanitizedFilename = output.sanitizeFileName(config.header.name)
+        const sanitizedFilename = output.sanitizeFileName(
+          config.fileName ?? config.header.name
+        )
         const userFilename = `${sanitizedFilename}.user.js`
         const proxyFilename = `${sanitizedFilename}.proxy.user.js`
         const metaFilename = `${sanitizedFilename}.meta.js`

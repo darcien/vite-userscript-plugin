@@ -208,6 +208,11 @@ export interface UserscriptPluginConfig {
   header: HeaderConfig
 
   /**
+   * Userscript built file name
+   */
+  fileName?: string
+
+  /**
    * Server config.
    */
   server?: ServerConfig
