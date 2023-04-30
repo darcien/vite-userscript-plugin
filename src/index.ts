@@ -9,7 +9,6 @@ import { createLogger, PluginOption, ResolvedConfig } from 'vite'
 import { server } from 'websocket'
 import { Banner } from './banner.js'
 import {
-  grants,
   pluginDir,
   pluginName,
   regexpScripts,
@@ -151,11 +150,10 @@ export default function UserscriptPlugin(
                 loader: 'js'
               })
 
-              config.header.grant = removeDuplicates(
-                isBuildWatch
-                  ? grants
-                  : [...defineGrants(source), ...(config.header.grant ?? [])]
-              )
+              config.header.grant = removeDuplicates([
+                ...defineGrants(source),
+                ...(config.header.grant ?? [])
+              ])
 
               if (isBuildWatch) {
                 const wsFile = readFileSync(resolve(pluginDir, 'ws.js'), 'utf8')
