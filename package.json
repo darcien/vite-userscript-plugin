@@ -1,5 +1,5 @@
 {
-  "name": "vite-userscript-plugin",
+  "name": "@darcien/vite-userscript-plugin",
   "version": "1.8.1",
   "type": "module",
   "types": "./dist/index.d.ts",
@@ -67,5 +67,8 @@
   },
   "peerDependencies": {
     "vite": ">=3.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
