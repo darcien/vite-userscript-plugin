@@ -1,4 +1,4 @@
-import { transformWithEsbuild } from 'vite'
+import { EsbuildTransformOptions, transformWithEsbuild } from 'vite'
 import { grants } from './constants.js'
 import type { Grants, Transform } from './types.js'
 
@@ -6,16 +6,16 @@ export function removeDuplicates(arr: any): any[] {
   return [...new Set(Array.isArray(arr) ? arr : arr ? [arr] : [])]
 }
 
-export async function transform({
-  file,
-  name,
-  loader
-}: Transform): Promise<string> {
+export async function transform(
+  { file, name, loader }: Transform,
+  options?: EsbuildTransformOptions
+): Promise<string> {
   const { code } = await transformWithEsbuild(file, name, {
     loader,
     minify: true,
     sourcemap: false,
-    legalComments: 'none'
+    legalComments: 'none',
+    ...options
   })
 
   return code

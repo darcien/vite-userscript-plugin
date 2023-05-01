@@ -1,3 +1,4 @@
+import { EsbuildTransformOptions } from 'vite'
 import { GM, GMwindow } from './constants.js'
 
 export interface Transform {
@@ -211,6 +212,18 @@ export interface UserscriptPluginConfig {
    * Userscript built file name
    */
   fileName?: string
+
+  /**
+   * Override default esbuild transform option
+   * used by the plugin for js loader.
+   * @default
+   * {
+   *  minify: true,
+   *  sourcemap: false,
+   *  legalComments: 'none',
+   * }
+   */
+  jsEsbuildTransformOptions?: EsbuildTransformOptions
 
   /**
    * Server config.
